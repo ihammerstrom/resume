@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" style="width:100%; height:100%;">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ian Hammerstrom's Resume</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body {
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: #222; background: #fff;
+    }
+    object { display: block; width: 100%; height: 100%; border: 0; }
+    .fallback {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; gap: 1.25rem; padding: 2rem; box-sizing: border-box; text-align: center;
+    }
+    .fallback h1 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+    .fallback a {
+      display: inline-block; padding: .75rem 1.5rem; border-radius: 6px;
+      background: #3B6B8A; color: #fff; text-decoration: none; font-weight: 600;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #eee; background: #1a1a1a; }
+    }
+  </style>
 </head>
-<body style="width:100%; height:100%; margin:0;">
-  <embed src="hammerstrom_resume.pdf" type="application/pdf" style="width:100%; height:100%;" />
+<body>
+  <object data="hammerstrom_resume.pdf" type="application/pdf">
+    <div class="fallback">
+      <h1>Ian Hammerstrom &mdash; Resume</h1>
+      <a href="hammerstrom_resume.pdf">Open the PDF</a>
+    </div>
+  </object>
+  <script>
+    // Phone browsers frequently render an empty PDF frame without firing the <object>
+    // fallback, so a blank page is the failure mode this is here to prevent. Send small
+    // screens straight to the link instead; tapping it opens the OS PDF viewer, which
+    // is a better read on a phone than an embedded frame anyway.
+    if (window.matchMedia('(max-width: 820px)').matches) {
+      document.body.innerHTML =
+        '<div class="fallback"><h1>Ian Hammerstrom &mdash; Resume</h1>' +
+        '<a href="hammerstrom_resume.pdf">Open the PDF</a></div>';
+    }
+  </script>
 </body>
 </html>
